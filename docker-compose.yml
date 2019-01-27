@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  database:
+    image: postgres
+    volumes:
+      - pg_data:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_USER: flask_rpg
+      POSTGRES_PASSWORD: flask_rpg
+    ports:
+      - "5432:5432"
+  web:
+    restart: always
+    build: .
+    command: flask run --host=0.0.0.0
+    volumes:
+      - .:/code
+    ports:
+      - "5000:5000"
+    depends_on:
+      - database
+    environment:
+      FLASK_APP: 'app.py'
+      FLASK_ENV: 'development'
+      SECRET_KEY: 'not-so-secret-huh'
+      DB_NAME: 'flask_rpg'
+      DB_HOST: 'database'
+      DB_USER: 'flask_rpg'
+      DB_PASSWORD: 'flask_rpg'
+      DEBUG: 'false'
+volumes:
+  pg_data: {}

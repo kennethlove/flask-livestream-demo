@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+    <title>Something</title>
+    <link rel="stylesheet" href="{{ url_for("static", filename="css/bootstrap.css") }}">
+</head>
+<body>
+    <div class="container">
+        {% block everything %}{% endblock %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block everything %}
+<form method="POST" action="{{ url_for("register") }}">
+    {{ form.csrf_token }}
+    <div>
+        {{ form.username.label }}
+        {{ form.username }}
+        {% if form.username.errors %}
+        <ul class="errors">
+            {% for error in form.username.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+    <div>
+        {{ form.accept_coc.label }} {{ form.accept_coc }}
+        {% if form.accept_coc.errors %}
+        <ul class="errors">
+            {% for error in form.accept_coc.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+    <input type="submit" value="Register">
+</form>
+{% endblock %}
